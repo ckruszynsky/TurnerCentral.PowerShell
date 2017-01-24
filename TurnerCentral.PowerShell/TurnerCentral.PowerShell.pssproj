@@ -29,6 +29,7 @@
   <ItemGroup>
     <Compile Include="Get-Settings.ps1" />
     <Compile Include="Search\Pause-Search.ps1" />
+    <Compile Include="Search\Search-Crawl.ps1" />
     <Compile Include="Search\Stop-Search.ps1" />
     <Compile Include="Update-TCSolution\Update-TCSolution.ps1" />
   </ItemGroup>
