@@ -2,20 +2,22 @@
 # Update_TCSolution.ps1
 #
 param 
-(    	
-	[string] $iniFile = "settings.ini"
+(    
 )
 
 Add-PSSnapin "Microsoft.SharePoint.PowerShell"
+cls
+$iniFile = "settings.ini"
 $settings = ..\Get-Settings.ps1 $iniFile
 $releaseFolder = $settings["Settings"]["ReleaseFolder"]
 
 foreach($kvp in $settings["Solutions"].GetEnumerator()){
 		
 	if($kvp.Value.Trim() -eq "true") {
-		Write-Host "Deploying Solution : $name.wsp"
 		$name = $kvp.Key.Trim()
-		Update-SPSolution -Identity "$name.wsp" -LiteralPath "$releaseFolder\$name.wsp" -GACDeployment -Force
+        Write-Host "Deploying Solution : $name.wsp"
+        $path = "$releaseFolder\$name.wsp"
+        $path
+		Update-SPSolution -Identity "$name.wsp" -LiteralPath $path -GACDeployment -Force
 	}
 }
-
