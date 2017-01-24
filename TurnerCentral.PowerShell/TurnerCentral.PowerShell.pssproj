@@ -28,12 +28,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Get-Settings.ps1" />
+    <Compile Include="Search\Pause-Search.ps1" />
+    <Compile Include="Search\Stop-Search.ps1" />
     <Compile Include="Update-TCSolution\Update-TCSolution.ps1" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Update-TCSolution\Settings.ini" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Search\" />
     <Folder Include="Update-TCSolution\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
