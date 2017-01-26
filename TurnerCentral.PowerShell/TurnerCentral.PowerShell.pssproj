@@ -32,11 +32,13 @@
     <Compile Include="Search\Search-Crawl.ps1" />
     <Compile Include="Search\Stop-Search.ps1" />
     <Compile Include="Update-TCSolution\Update-TCSolution.ps1" />
+    <Compile Include="Workflows\Remove-AllWorkflows.ps1" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Update-TCSolution\Settings.ini" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Workflows\" />
     <Folder Include="Search\" />
     <Folder Include="Update-TCSolution\" />
   </ItemGroup>
