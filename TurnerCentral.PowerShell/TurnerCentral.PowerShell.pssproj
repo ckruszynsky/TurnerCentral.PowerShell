@@ -28,16 +28,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Get-Settings.ps1" />
-    <Compile Include="Search\Pause-Search.ps1" />
-    <Compile Include="Search\Search-Crawl.ps1" />
-    <Compile Include="Search\Stop-Search.ps1" />
-    <Compile Include="Update-TCSolution\Update-TCSolution.ps1" />
-    <Compile Include="Workflows\Remove-AllWorkflows.ps1" />
+    <Compile Include="TCSearch\TCSearch.psm1" />
+    <Compile Include="TCSolution\TCSolution.psm1" />
+    <Compile Include="TCWorkflow\TCWorkflow.psm1" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Update-TCSolution\Settings.ini" />
+    <Content Include="TCSolution\Settings.ini" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="TCWorkflow\" />
+    <Folder Include="TCSolution\" />
+    <Folder Include="TCSearch\" />
     <Folder Include="Workflows\" />
     <Folder Include="Search\" />
     <Folder Include="Update-TCSolution\" />

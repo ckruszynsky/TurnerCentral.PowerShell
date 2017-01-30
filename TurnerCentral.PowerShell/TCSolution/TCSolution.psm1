@@ -1,14 +1,30 @@
-#
-# Update_TCSolution.ps1
-#
-param 
-(    
-)
 
+function Get-Settings {
+	param ($file)
+
+$ini = @{}
+switch -regex -file $file
+{
+    "^\[(.+)\]$" {
+        $section = $matches[1]
+        $ini[$section] = @{}
+    }
+    "(.+)=(.+)" {
+        $name,$value = $matches[1..2]
+        $ini[$section][$name] = $value
+    }
+}
+$ini
+}
+
+function Update-TCSolution {
+	param (    
+		$iniFile = "settings.ini"
+	)
 Add-PSSnapin "Microsoft.SharePoint.PowerShell"
-cls
-$iniFile = "settings.ini"
-$settings = ..\Get-Settings.ps1 $iniFile
+
+$settings = Get-Settings -file $iniFile
+
 $releaseFolder = $settings["Settings"]["ReleaseFolder"]
 
 foreach($kvp in $settings["Solutions"].GetEnumerator()){
@@ -21,3 +37,7 @@ foreach($kvp in $settings["Solutions"].GetEnumerator()){
 		Update-SPSolution -Identity "$name.wsp" -LiteralPath $path -GACDeployment -Force
 	}
 }
+}
+
+
+

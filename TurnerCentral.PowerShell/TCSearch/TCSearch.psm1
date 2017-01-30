@@ -1,12 +1,38 @@
-#
-# Search_Crawl.ps1
-# Starts, Stops, or performs a full crawl of the specified site collection depending 
-# on the parameter passed 
-#
-# Example: Search-Crawl "http://foo" "full"  --starts the search engine in full crawl mode for all sources
-#          Search-Crawl "http://foo" "Incremental" --starts the search engine crawl in incremental mode 
-#		   Search-Crawl "http://foo" "Stop" -stops the search engine crawl for all sources
-#
+function Stop-Search {
+param
+(
+  $searchServiceName = "OSearch15",
+  $searchHostControllerName = "SPSearchHostController"
+)
+
+$searchService = get-service $searchServiceName
+$searchHostControllerService = Get-Service $searchHostControllerName
+if($searchService.Status -eq "Running"){
+	set-service -Name  $searchServiceName -startuptype Disabled 
+	$searchService.stop() 
+}
+
+if($searchHostControllerService.Status -eq "Running"){
+	set-service -Name $searchHostControllerName -StartupType Disabled
+	$searchHostControllerService.Stop()
+}
+
+
+do {
+	$hostService = get-service $searchHostControllerName
+	if($hostService.Status -eq "Stopped"){
+		$yes = 1
+	}
+	Start-Sleep -Seconds 10
+}
+until($yes -eq 1)
+
+Write-Host "###################################################"
+Write-Host "Search Services are stopped" -ForegroundColor Green
+Write-Host "###################################################"
+}
+
+function Set-SearchCrawler {
 param(
 	$SiteCollectionURL  =  "",
 	$FullIncrementalOrStop = "Full"
@@ -50,3 +76,10 @@ param(
             } 
         } 
 	}
+}
+
+function Set-SearchToPause {
+	Add-PSSnapin "*Share*"
+	$ssa = Get-EnterpriseSearchServiceApplication
+	$ssa.pause()
+}

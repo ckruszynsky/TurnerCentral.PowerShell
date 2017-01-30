@@ -1,6 +1,4 @@
-#
-# Remove_AllWorkflows.ps1
-#
+function Remove-AllWorkflows {
 param(
 	$siteUrl,
 	$listName 
@@ -22,3 +20,4 @@ foreach ($item in $list.Items) {
 }
 
 $web.Dispose();
+}
